@@ -1,4 +1,12 @@
-import ..
+import bookrank.crawling as cr
+
+url = 'http://www.yes24.com/24/Category/BestSeller?CategoryNumber=001&sumgb=06' # yes24 종합베스트셀러 / 20개씩 / 최근 7일 간
+par_html = cr.makepar(url) # parsed html
+
+book = [] # book name or code < yes24 경우 도서별 code 얻을 수 있음
+def bookrank(par_html) :
+    par_html.find('tbody')
+
 
 print('hello')
 
@@ -18,4 +26,6 @@ pagenumber = "&PageNumber=%d" %1
 
 url_2 = url + pagenumber
 print(url_2)
+
+
 
