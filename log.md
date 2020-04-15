@@ -14,8 +14,8 @@ BookData
 3. publisher
 4. published_date
 
-BookRank
+BookRank ==> 일별 데이터
 1. BookCode
 2. rank
 3. yes24_sellingpoint
-==> 일별 데이터
+
