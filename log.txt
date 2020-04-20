@@ -1,0 +1,3 @@
+4/9 git bookrank 연결, 집 컴퓨터는 ImEditor에 연결된 상태
+- Project 파일 다시 정리해야 함
+
