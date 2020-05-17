@@ -33,7 +33,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'gather_rank.apps.GatherRankConfig',
+    # Local App # 내가 사용할 것 여기에 표시
+    'gather_rank',
+
+    #Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -106,10 +109,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr' #en-us(default)
 
-TIME_ZONE = 'ROK'
-# ROK / default = UTC
+TIME_ZONE = 'Asia/Seoul' #국롤
+# default = UTC
 
 USE_I18N = True
 
