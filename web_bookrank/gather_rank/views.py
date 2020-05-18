@@ -1,8 +1,6 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from .models import bookcode, bookdata, bookrank
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
 
 def intro(request):
     bookcodes = bookcode.objects.all()
