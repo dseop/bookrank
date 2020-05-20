@@ -12,6 +12,8 @@ now = datetime.now()
 week = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 today = "%s %s %s %s" %(now.year, now.month, now.day, week[now.weekday()])
 
+
+
 # html parsing from url #
 def makepar(url) :
     if url is None :

@@ -1,11 +1,35 @@
 from pandas import DataFrame as df
+import time
+from datetime import datetime as dt
 import crawling as cr
 
 # 서지 정보만 빨리 뽑아내고 싶을 때, url만 입력해서 뽑아낼 때 사용!
 
+
 ### URL 정보 ###
-url_list ="""http://www.yes24.com/Product/Goods/9336176?Acode=101
-http://www.yes24.com/Product/Goods/61288827?Acode=101""".split('\n')
+url_list =[]
+# """http://www.yes24.com/Product/Goods/89309569?Acode=101""".split('\n')
+url = 'http://www.yes24.com/24/category/bestseller?CategoryNumber=001001025010004&sumgb=06&FetchSize=80'
+url += '&FetchSize=%s&GS=03' %(80) #int(input('fetchsize? 20/40/80')))  # 80개씩, 품절제외
+#p = list(range(1, int(input('which page?'))+1))
+p = [1]
+
+fn = str(dt.today().date())
+
+starttime = time.time()
+
+idx = 1
+tmp_par = cr.makepar(url)
+url_list = []
+idx_list = []
+
+for page in p :
+    tmpurl = url + '&PageNumber=%s' % (page)
+    for i in tmp_par.find_all('td', 'goodsTxtInfo'):
+        idx_list.append(idx)
+        idx += 1
+        url_list.append('http://www.yes24.com' + i.find('a', href=True)['href'])
+
 t_list = []
 t2_list = []
 a_list = []
