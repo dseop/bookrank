@@ -4,6 +4,8 @@ from datetime import datetime as dt
 import crawling as cr
 
 url = input()
+# http://www.yes24.com/24/category/bestseller?CategoryNumber=001001025008008&sumgb=06
+# 위 형식의 주소 입력 >>> 위 주소는 '베스트셀러보기'에 해당됨('빠른분야찾기'x)
 url += '&FetchSize=%s&GS=03' %(40) 
 # 리스트 00개씩, 품절제외(gs=03)
 
@@ -121,6 +123,6 @@ def gbi_yes(url_list) : #get best info(yes24)
                    'URL': url_list})
     return raw_data
 
-# fn = str(dt.today().date()) # file name = today's date
+fn = str(dt.today().date()) # file name = today's date
 rd = gbi_yes(url_list)
-rd.to_csv('getinfo.csv', header=True, index=True, encoding='ms949')
+rd.to_csv(fn+'.csv', header=True, index=True, encoding='ms949')
