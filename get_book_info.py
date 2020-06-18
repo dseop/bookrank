@@ -3,7 +3,7 @@ import time
 from datetime import datetime as dt
 import crawling as cr
 
-url = 'http://www.yes24.com/24/category/bestseller?CategoryNumber=001001025010004&sumgb=06'
+url = input()
 url += '&FetchSize=%s&GS=03' %(40) 
 # 리스트 00개씩, 품절제외(gs=03)
 
@@ -27,7 +27,7 @@ def mak_url_list(url) : # get: 리스트형 url / return: url_list
             idx += 1
 
             url_list.append('http://www.yes24.com' + i.find('a', href=True)['href'])
-return url_list        
+    return url_list        
 
 ### you can choose the way to insert url_list ###
 url_list = mak_url_list(url)
