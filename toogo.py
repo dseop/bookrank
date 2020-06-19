@@ -4,7 +4,7 @@ import crawling as cr
 
 o = open('class_toogo/html.txt')
 tbody_html = o.readlines
-tbody_html
+
 # url = 'https://gbadmin.gilbut.co.kr/customer/author_recruit?search_date=&gr_strdate=&gr_enddate=&search_cate1=004000&search_cate2=004001&search_state=&search_F=GR_NAME&search_S='
 # tmp_par = cr.makepar(url)
 
