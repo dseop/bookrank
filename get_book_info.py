@@ -32,6 +32,9 @@ def mak_url_list(url) : # get: 리스트형 url / return: url_list
         if 'Category/Display' in url :
             info_list = tmp_par.find_all('div', 'goods_name')
             # 빠른분야찾기 include 'goods_name' (카테고리분석)
+        elif 'searchcorner' in url :
+            info_list = tmp_par.find_all('td', 'goods_infogrp')
+            # 검색 include 'goods_infogrp' (검색리스트)
         else : 
             info_list = tmp_par.find_all('td', 'goodsTxtInfo')
             # 베스트셀러보기 include 'goodsTxtInfo' (베스트분석)
@@ -141,4 +144,4 @@ def gbi_yes(url_list) : #get best info(yes24)
 
 fn = str(dt.today().date()) # file name = today's date
 rd = gbi_yes(url_list)
-rd.to_csv(fn+'.csv', header=True, index=True, encoding='ms949')
+rd.to_csv(fn+'_부동산 절세.csv', header=True, index=True, encoding='ms949')
