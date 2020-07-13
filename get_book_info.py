@@ -48,6 +48,7 @@ page_list = []
 weight_list = []
 size_list = []
 cate_list = []
+index_list = []
 review_list=[]
 
 def gbi_yes(url_list) : #get best info(yes24)
@@ -101,6 +102,10 @@ def gbi_yes(url_list) : #get best info(yes24)
             #de_cate = cate[2]+'>'+cate[3]
             tmp_list.append(cate[-1])
         cate_list.append(", ".join(tmp_list))
+
+        #목차
+        if tmp_par.find('div', 'infoWrap_txt') is None : index_list.append('0')
+        else : index_list.append(tmp_par.find('div', 'infoSetCont_wrap').text)
         
         #리뷰수
         if tmp_par.find('span','gd_reviewCount').find('em') is None :
@@ -119,6 +124,7 @@ def gbi_yes(url_list) : #get best info(yes24)
                    '무게': weight_list,
                    '판형': size_list,
                    '분류': cate_list,
+                   '목차' : index_list,
                    '리뷰수': review_list,
                    'URL': url_list})
     return raw_data
