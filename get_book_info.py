@@ -4,9 +4,16 @@ from datetime import datetime as dt
 import crawling as cr
 
 url = input()
-# http://www.yes24.com/24/category/bestseller?CategoryNumber=001001025008008&sumgb=06
+# 1 # http://www.yes24.com/24/category/bestseller?CategoryNumber=001001025008008&sumgb=06
 # 위 형식의 주소 입력 >>> 위 주소는 '베스트셀러보기'에 해당됨('빠른분야찾기'x)
-url += '&FetchSize=%s&GS=03' %(40) 
+# 2 # http://www.yes24.com/24/Category/Display/001001025008008?ParamSortTp=05
+# '빠른분야찾기'에 해당
+if 'Category/Display' in url :
+    if 'ParamSortTp=05' not in url :
+        url += '?ParamSortTp=05'
+
+if '&FetchSize=' not in url :
+    url += '&FetchSize=%s&GS=03' %(40) 
 # 리스트 00개씩, 품절제외(gs=03)
 
 tmp_par = cr.makepar(url)
@@ -21,10 +28,19 @@ def mak_url_list(url) : # get: 리스트형 url / return: url_list
     for page in [1] : #page number you want to gather
         tmpurl = url + '&PageNumber=%s' % (page) #insert page info
         tmp_par = cr.makepar(tmpurl) #parsing by page
-        for i in tmp_par.find_all('td', 'goodsTxtInfo'):
+
+        if 'Category/Display' in url :
+            info_list = tmp_par.find_all('div', 'goods_name')
+            # 빠른분야찾기 include 'goods_name' (카테고리분석)
+        elif 'searchcorner' in url :
+            info_list = tmp_par.find_all('td', 'goods_infogrp')
+            # 검색 include 'goods_infogrp' (검색리스트)
+        else : 
+            info_list = tmp_par.find_all('td', 'goodsTxtInfo')
             # 베스트셀러보기 include 'goodsTxtInfo' (베스트분석)
-            # 빠른분야찾기 include 'goods_info' (카테고리분석)
-            
+        
+        for i in info_list :
+
             idx_list.append(idx)
             idx += 1
 
@@ -52,9 +68,12 @@ index_list = []
 review_list=[]
 
 def gbi_yes(url_list) : #get best info(yes24)
+    pn=1
     for url in url_list :
     #url = url_list[0]
-        print('present url\n%s' %url)
+        print('Processing URL for getting infomation of the book %d\n%s' %(pn, url))
+        pn+=1
+        
         tmp_par = cr.makepar(url)
         
         #도서명
@@ -87,7 +106,7 @@ def gbi_yes(url_list) : #get best info(yes24)
         #도서규격
         a = tmp_info.replace('쪽','').replace('g','').replace('mm','').split(' ')
         page_list.append(a[0])
-        print(len(a))
+
         if len(a) < 3:
             weight_list.append('')
             size_list.append(a[1])
@@ -131,4 +150,4 @@ def gbi_yes(url_list) : #get best info(yes24)
 
 fn = str(dt.today().date()) # file name = today's date
 rd = gbi_yes(url_list)
-rd.to_csv(fn+'.csv', header=True, index=True, encoding='ms949')
+rd.to_csv(fn+'_부동산 절세.csv', header=True, index=True, encoding='ms949')
