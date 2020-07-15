@@ -50,24 +50,24 @@ def mak_url_list(url) : # get: 리스트형 url / return: url_list
 ### you can choose the way to insert url_list ###
 url_list = mak_url_list(url)
 # url_list ="""http://www.yes24.com/Product/Goods/89309569?Acode=101""".split('\n')
-###  ###
-
-t_list = []
-t2_list = []
-a_list = []
-pu_list = []
-d_list = []
-pr_list = []
-sp_list = []
-info_list = []
-page_list = []
-weight_list = []
-size_list = []
-cate_list = []
-#index_list = []
-review_list=[]
 
 def gbi_yes(url_list) : #get best info(yes24)
+    
+    t_list = []
+    t2_list = []
+    a_list = []
+    pu_list = []
+    d_list = []
+    pr_list = []
+    sp_list = []
+    info_list = []
+    page_list = []
+    weight_list = []
+    size_list = []
+    cate_list = []
+    #index_list = []
+    review_list=[]
+    
     pn=1
     for url in url_list :
     #url = url_list[0]
